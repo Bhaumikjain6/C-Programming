@@ -14,15 +14,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void createArray(int*** , int ,int);
-void freeArray(int*** , int, int);
-void addElements(int** , int , int);
-void print(int** , int , int);
-void transpose(int** , int ,int );
-int** matrixMul(int** , int**);
+void createArray(int*** , int ,int);    //done
+void freeArray(int*** , int, int);      //done
+void addElements(int** , int , int);    // done
+void print(int** , int , int);          //done
+int** transpose(int** , int ,int );       //done
+int** matrixMul(int** , int**, int , int , int , int);           //done
 void convolution(int** ,int** , int , int);
 void inverse(int** , int** , int , int);
 void eigenvalue();
 void eigenvector();
 void linearEquation();
 void principalSubMatrix();
+void determinant();
+void minor(); 
