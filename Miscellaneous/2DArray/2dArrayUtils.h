@@ -27,4 +27,4 @@ void eigenvector();
 void linearEquation();
 void principalSubMatrix();
 void determinant();
-void minor(); 
+void minor();

@@ -1,9 +1,9 @@
 #include "2dArrayUitls.h"
 
 void createArray(int*** a , int rows , int cols){
-    a = (int**)malloc(rows*sizeof(int*));
-    for(int i = 0; i < cols; ++i){
-      a[i] = (int*)malloc(cols*sizeof(int));
+    (*a) = (int**) malloc( rows * sizeof(int*));
+    for(int i = 0; i < rows; ++i){
+        ((*a)[i]) = (int*) malloc(cols * sizeof(int));
     }
     //*a = calloc(col, rows*sizeof(int));
     for(int i = 0; i < rows; i++){
