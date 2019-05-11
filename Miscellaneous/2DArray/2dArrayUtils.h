@@ -20,11 +20,11 @@ void addElements(int** , int , int);    // done
 void print(int** , int , int);          //done
 int** transpose(int** , int ,int );       //done
 int** matrixMul(int** , int**, int , int , int , int);           //done
-void convolution(int** ,int** , int , int);
+void convolution(int** ,int** , int , int);     //done
+int determinant(int** , int , int); // done
 void inverse(int** , int** , int , int);
 void eigenvalue();
 void eigenvector();
 void linearEquation();
 void principalSubMatrix();
-void determinant();
-void minor();
+void padding();

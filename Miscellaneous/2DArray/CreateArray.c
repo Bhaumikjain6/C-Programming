@@ -28,29 +28,42 @@ void print(int** , int rows, int cols){
   }
 }
 
-float determinant(int** matrix, int rows, int cols){
-    int sum = 0;
-    static int x ;
-    x++;
+int determinant(int** matrix, int rows, int cols){
+  	int det;
+  	int mul =  -1;
+  	int **minor = NULL;
 
-    if(rows != cols){
-      printf("Given matrix is not a square matrix");
-      return 0.0;
-    }
-    for(int i = 0; i < rows; ++i){
-      for(int j = 0; j < cols; ++j){
-      sum += a[i][j] * (determinant(Minor(matrix, row, col),rows-1,cols-1);
-      }
-    }
-}
+  	if(size == 1){
+  		det = inputMatrix[0][0];
+  		return det;
+  	}
 
-int** Minor(int** matrix , int row, int col){
-    createArray(int** matrix, int row, int col);
-    for(int i = 0; i < row; ++i){
-      for(int j = 0; j < col; ++j){
+  	else if(size == 2){
+  		det = (a[0][0]*a[1][1]) - (a[1][0]*a[0][1]);
+  		return det;
+  	}
 
-      }
-    }
+  	else if{
+  		for(int i = 0 ; i < size; ++i){
+  			createArray(&minor,size - 1,size - 1);
+  			int r1 = 0 ;
+  			int c1 = 0;
+  			for(int j = 1; j < size;++j){
+  				c1 = 0;
+  				for(int k = 0; k < size; ++k){
+  					if(k == i){
+  						continue;
+  					}
+  					minor[r1][c1] = inputMatrix[j][k];
+  					r1++;
+  				}
+  			}
+  			det = det + mul * inputMatrix[0][i] * determinant(&minor[0][0],size - 1);
+  			mul *= mul;
+  			free(&minor, size-1, size-1);
+  		}
+  	}
+  	return det;
 }
 
 int** transpose(int** inputMatrix ,int rows , int cols){
