@@ -1,12 +1,10 @@
 #include "2dArrayUitls.h"
-#include <math.h>
 
 void createArray(int*** a , int rows , int cols){
     (*a) = (int**) malloc( rows * sizeof(int*));
     for(int i = 0; i < rows; ++i){
         ((*a)[i]) = (int*) malloc(cols * sizeof(int));
     }
-    //*a = calloc(col, rows*sizeof(int));
     for(int i = 0; i < rows; i++){
       for(int j = 0; j < cols; j++){
         a[i][j] = 0;
@@ -66,7 +64,6 @@ int determinant(int** matrix, int size){
 }
 
 void transpose(int** inputMatrix , int** outputMatrix, int rows , int cols){
-
     for(int i = 0; i < cols; ++i){
       for(int j = 0; j < rows; ++j){
         outputMatrix[i][j] = inputMatrix[j][i];
@@ -93,4 +90,50 @@ int** matrixMul(int** Matrix1, int** Matrix2, int rows1, int cols1, int cols2){
       }
     }
     return outputMatrix;
+}
+
+void addToMatrix(int** inputMatrix , int rows ,int cols , int value) {
+    for(int i = 0; i < rows; ++i){
+      for(int j = 0; j < cols; ++j){
+        inputMatrix[i][j] += value;
+      }
+    }
+}
+
+void subtractFromMatrix(int** inputMatrix , int rows, int cols, int value){
+  for(int i = 0; i < rows; ++i){
+    for(int j = 0; j < cols; ++j){
+      inputMatrix[i][j] -= value;
+    }
+  }
+}
+
+void divideFromMatrix(int** inputMatrix, int rows, int cols, int value){
+  if( value != 0 ){
+    for(int i = 0; i < rows; ++i){
+      for(int j = 0; j < cols; ++j){
+        inputMatrix[i][j] /= value;
+      }
+    }
+  }
+}
+
+void multiplyToMatrix (int** inputMatrix, int rows, int cols, int value){
+  for(int i = 0; i < rows; ++i){
+    for(int j = 0; j < cols; ++j){
+      inputMatrix *= value;
+    }
+  }
+}
+
+int** matrixInverse(int** inputMatrix , size_t size){
+    int det = 0 ;
+    int** minor = NULL;
+    int** outputMatrix = NULL;
+
+    createArray(&outputMatrix,size,size);
+    if(intputMatrix[0][0] != 1){
+      divideFromMatrix(inputMatrix,size,size,inputMatrix[0][0]);
+    }
+    det = determinant(inputMatrix , size);
 }

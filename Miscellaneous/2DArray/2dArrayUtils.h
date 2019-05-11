@@ -3,6 +3,7 @@
   pointers.
   The arugments to the create and free array functions has to be a double pointer.
   for eg:
+
   int** convolutedMatrix = NULL;
   createArray(convolutedMatrix,2,4);
   freeArray(convolutedMatrix,2,4);
@@ -13,6 +14,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 void createArray(int*** , int ,int);    //done and verified
 void freeArray(int*** , int, int);      //done and verified
@@ -28,3 +30,7 @@ void eigenvector();
 void linearEquation();
 void principalSubMatrix();
 void padding();
+void addToMatrix(int**, int ,int , int);              //done and verified
+void subtractFromMatrix(int** , int , int, int);      //done and verified
+void divideFromMatrix(int** , int, int, int);         //done and verified
+void multiplyToMatrix(int**, int , int, int);         //done and verified
