@@ -1,4 +1,5 @@
 #include "2dArrayUitls.h"
+#include <math.h>
 
 void createArray(int*** a , int rows , int cols){
     (*a) = (int**) malloc( rows * sizeof(int*));
@@ -15,9 +16,9 @@ void createArray(int*** a , int rows , int cols){
 
 void freeArray(int*** a, int rows, int cols){
   for( int i = 0; i < cols; ++i){
-    free(a[i]);
+    free((*a)[i]);
   }
-  free(a);
+  free(*a);
 }
 
 void print(int** , int rows, int cols){
@@ -28,25 +29,24 @@ void print(int** , int rows, int cols){
   }
 }
 
-int determinant(int** matrix, int rows, int cols){
+int determinant(int** matrix, int size){
   	int det;
-  	int mul =  -1;
   	int **minor = NULL;
 
   	if(size == 1){
-  		det = inputMatrix[0][0];
+  		det = matrix[0][0];
   		return det;
   	}
 
   	else if(size == 2){
-  		det = (a[0][0]*a[1][1]) - (a[1][0]*a[0][1]);
+  		det = (matrix[0][0]*matrix[1][1]) - (matrix[1][0]*matrix[0][1]);
   		return det;
   	}
 
-  	else if{
+  	else{
+      det = 0;
   		for(int i = 0 ; i < size; ++i){
   			createArray(&minor,size - 1,size - 1);
-  			int r1 = 0 ;
   			int c1 = 0;
   			for(int j = 1; j < size;++j){
   				c1 = 0;
@@ -54,13 +54,12 @@ int determinant(int** matrix, int rows, int cols){
   					if(k == i){
   						continue;
   					}
-  					minor[r1][c1] = inputMatrix[j][k];
-  					r1++;
+  					minor[j - 1][c1] = matrix[j][k];
+  					c1++;
   				}
   			}
-  			det = det + mul * inputMatrix[0][i] * determinant(&minor[0][0],size - 1);
-  			mul *= mul;
-  			free(&minor, size-1, size-1);
+  			det += pow(-1.0,(float)i) * matrix[0][i] * determinant(minor,size - 1);
+  			freeArray(&minor, size-1, size-1);
   		}
   	}
   	return det;
