@@ -25,12 +25,15 @@ int** matrixMul(int** , int**, int , int , int);           //done and verified
 void convolution(int** ,int** , int , int);     //done
 int determinant(int** , int , int);     // done and verified
 void inverse(int** , int** , int , int);
+
+void addToMatrix(int**, int ,int , int);              //done and verified
+void subtractFromMatrix(int** , int , int, int);      //done and verified
+void divideFromMatrix(int** , int, int, int);         //done and verified
+void multiplyToMatrix(int**, int , int, int);         //done and verified
+
+
 void eigenvalue();
 void eigenvector();
 void linearEquation();
 void principalSubMatrix();
 void padding();
-void addToMatrix(int**, int ,int , int);              //done and verified
-void subtractFromMatrix(int** , int , int, int);      //done and verified
-void divideFromMatrix(int** , int, int, int);         //done and verified
-void multiplyToMatrix(int**, int , int, int);         //done and verified

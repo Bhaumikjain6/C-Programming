@@ -135,5 +135,6 @@ int** matrixInverse(int** inputMatrix , size_t size){
     if(intputMatrix[0][0] != 1){
       divideFromMatrix(inputMatrix,size,size,inputMatrix[0][0]);
     }
+    
     det = determinant(inputMatrix , size);
 }
