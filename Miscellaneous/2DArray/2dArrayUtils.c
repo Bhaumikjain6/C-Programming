@@ -65,28 +65,28 @@ int determinant(int** matrix, int size){
   	return det;
 }
 
-int** transpose(int** inputMatrix ,int rows , int cols){
-    int** outputMatrix = NULL;
-    createArray(&outputMatrix[0], cols, rows);
+void transpose(int** inputMatrix , int** outputMatrix, int rows , int cols){
+
     for(int i = 0; i < cols; ++i){
       for(int j = 0; j < rows; ++j){
         outputMatrix[i][j] = inputMatrix[j][i];
       }
     }
-    return outputMatrix;
 }
 
-int** matrixMul(int** Matrix1, int** Matrix2, int rows1, int cols1, int rows2, int cols2){
+int** matrixMul(int** Matrix1, int** Matrix2, int rows1, int cols1, int cols2){
+    int sum = 0;
     int** outputMatrix = NULL;
     if((rows2 != cols1)){
       printf("The dimensions of Matrix are not proper");
       return 0;
     }
-    createArray(&outputMatrix[0],rows1,cols2);
+    createArray(&outputMatrix,rows1,cols2);
     for(int i = 0; i < rows1; ++i){
       for(int j = 0; j < cols2; ++j){
         for(int l = 0; l < cols1; ++l){
-          sum += Matrix1[j][l] * Matrix2[l][j];
+            sum += Matrix1[i][l] * Matrix2[l][j];
+          //printf("%d ",Matrix1[j][l] * Matrix2[l][j]);
         }
         outputMatrix[i][j] = sum;
         sum = 0;

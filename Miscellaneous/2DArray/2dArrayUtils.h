@@ -14,14 +14,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void createArray(int*** , int ,int);    //done
-void freeArray(int*** , int, int);      //done
-void addElements(int** , int , int);    // done
-void print(int** , int , int);          //done
-int** transpose(int** , int ,int );       //done
-int** matrixMul(int** , int**, int , int , int , int);           //done
+void createArray(int*** , int ,int);    //done and verified
+void freeArray(int*** , int, int);      //done and verified
+void addElements(int** , int , int);    // done and verified
+void print(int** , int , int);          //done and verified
+void transpose(int** , int** ,int ,int );       //done and verified
+int** matrixMul(int** , int**, int , int , int);           //done and verified
 void convolution(int** ,int** , int , int);     //done
-int determinant(int** , int , int); // done
+int determinant(int** , int , int);     // done and verified
 void inverse(int** , int** , int , int);
 void eigenvalue();
 void eigenvector();
