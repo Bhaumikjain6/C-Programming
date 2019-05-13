@@ -36,3 +36,6 @@
 #define blockSizeOfMhrPtBpf                 516
 #define numTapsOfBpf1045                    48
 #define blockSizeOfFhr1045                  500
+
+//// Variables related to FHR and Uc algorithm
+ 
