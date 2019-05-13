@@ -18,6 +18,8 @@
 #define blockSizeOfUcNotch                  550
 #define numTapsOfUcLpf                      51
 #define blockSizeOfUcLpf                    550
+#define numTapsOfUcBpf                      16
+#define blockSizeofUcBpf                    54
 
 //// Constants related to FHR algorithm
 #define blockSizeOfFhrPtDf                  516
@@ -37,5 +39,9 @@
 #define numTapsOfBpf1045                    48
 #define blockSizeOfFhr1045                  500
 
+#define IPSIZE                              500
+#define NEWQRSRANGE                         39
+#define mhrMinPeakDistance                  250
+#define fhrMinPeakDistance                  158
+
 //// Variables related to FHR and Uc algorithm
- 

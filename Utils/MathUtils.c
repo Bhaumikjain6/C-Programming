@@ -61,6 +61,13 @@ void divideElement(float* signal, size_t size, float value){
     }
 }
 
+void multiplyElement(float* signal, size_t size; float value){
+  int i;
+  for(i = 0; i < size; ++i){
+    signal[i] *= value;
+  }
+}
+
 void absf(float* signal, size_t size){
     int i;
     for(i = 0; i < size; ++i){
@@ -81,7 +88,18 @@ float findMax(const float* signal, size_t size){
     return maxValue;
 }
 
-void upSampling(const float* signal, float* outputSignal ,size_t rate, size_t size){
+float findMin(const float* signal, size_t size){
+    int i;
+    int minValue = signal[0];
+    for(i = 1; i < size; ++i){
+      if(signal[i] < minValue){
+        minValue = signal[i];
+      }
+    }
+    return minValue;
+}
+
+void upSample(const float* signal, float* outputSignal ,size_t rate, size_t size){
     int i,j;
     for(i = 0 ; i < (size*rate); ){
         outputSignal[i] = signal[i / rate];
@@ -92,7 +110,7 @@ void upSampling(const float* signal, float* outputSignal ,size_t rate, size_t si
     }
 }
 
-void downSampling(const float* signal, float* outputSignal, size_t rate,size_t size){
+void downSample(const float* signal, float* outputSignal, size_t rate,size_t size){
     int i;
     for (i = 0; i < size; i++) {
     /* code */
@@ -126,5 +144,72 @@ void reverseArray(float* inputArray, size_t size){
   int i = 0;
   for(i = 0; i < size; ++i){
     inputArray[i] = inputArray[size - 1];
+  }
+}
+
+void squareArray(float* inputArray, size_t size){
+  int i = 0;
+  for(i = 0; i < size; ++i){
+    inputArray[i] *= inputArray[i];
+  }
+}
+
+void createArray(float* inputArray, const float value, size_t size){
+  int i = 0;
+  for(i = 0; i < size; ++i){
+    inputArray[i] = value;
+  }
+}
+
+void meanImputation(float* input1, float* input2, float* mhrLocs, size_t* mhrCount){
+  int i = 0;
+  for(i = 0; i < (*mhrCount); ++i){
+    memcpy(input1 + mhrLocs[i] - 19, input2, NEWQRSRANGE * sizeof(float));
+  }
+}
+
+void smoothing(float* inputToSmoothing, float* outputOfSmoothing, size_t size , size_t windowSize){
+    int i = 0;
+    int midPoint = windowSize / 2 ;
+    float sum = 0;
+
+    for(i = 0; i < size; ++i){
+      if(i < midPoint){
+        for(j = 0; j < windowSize - midPoint + i; ++j){
+          sum += inputToSmoothing[j];
+        }
+        outputOfSmoothing[i] = sum / (windowSize - midPoint + i);
+      }
+      else if((i >= midPoint) && (i < IPSIZE - midPoint)){
+        for(j = i - midPoint ; j < windowSize - midPoint + i; ++j){
+          sum += inputToSmoothing[j];
+        }
+        outputOfSmoothing[i] = sum / windowSize;
+      }
+      else if((i >= IPSIZE - midPoint) && (i < 500)){
+        for(j = i - 2; j < IPSIZE ; ++j){
+          sum += inputToSmoothing[j];
+        }
+        outputOfSmoothing[i] = sum / (IPSIZE + midPoint - i);
+      }
+      sum = 0;
+    }
+}
+
+void arraySubtract(float* input1, float* input2, size_t size){
+    int i = 0;
+    for(i = 0; i < size; ++i){
+      input1[i] = input2[i] - input1[i];
+    }
+}
+
+void appendArray(float* input1, float* input2, size_t size){
+    memcpy(input1, input2 , size * sizeOf(float));
+}
+
+void arrayMultiply(float* input1, float input2, size_t size){
+  int i = 0;
+  for( i = 0; i < size; ++i){
+    input1[i] *= input2[i];
   }
 }

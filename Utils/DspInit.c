@@ -54,7 +54,6 @@ void adaptFiltDownsampleInit(void){
 
 void adaptFiltDownsampleFhr(const float* mhrInputToAdaptDS,const float* fhrInputToAdaptDS, float* mhrOutputOfAdaptDS, float* fhrOutputOfAdaptDS){
     adaptFiltDownsampleInit();
-
     //Downsample by a factor of 2
     arm_fir_f32(&InstanceforMhrAdaptFiltDS, mhrInputToAdaptDS, mhrOutputOfAdaptDS,
     blockSizeOfAdaptFiltDS);
@@ -73,15 +72,12 @@ void adaptFiltUpsampleInit(void){
                  &fhrAdaptFiltUSStatearr, blockSizeOfAdaptFiltUS);
 }
 
-void adaptFiltUpsampleFhr(const float* mhrInputToAdaptDS,const float* fhrInputToAdaptDS, float* mhrOutputOfAdaptDS, float* fhrOutputOfAdaptDS){
+void adaptFiltUpsampleFhr(const float* mhrInputToAdaptUS, float* mhrOutputOfAdaptUS){
     adaptFiltUpsampleInit();
-
     //Upsample by a factor of 2
     arm_fir_f32(&InstanceforMhrAdaptFiltUS, mhrInputToAdaptUS, mhrOutputOfAdaptUS,
     blockSizeOfAdaptFiltUS);
 
-    arm_fir_f32(&InstanceforFhrAdaptFiltUS, fhrInputToAdaptUS, fhrOutputOfAdaptUS,
-    blockSizeOfAdaptFiltUS);
 }
 
 void matchFilterFhrInit(const float* coeffOfMatchFilt){
@@ -144,6 +140,16 @@ void UcNotchFilt(const float* inputToUcNotch, float* outputOfUcNotch){
   UcNotchFiltInit();
   arm_fir_f32(&instanceForUcNotch, inputToLpfNotch, outputOfUcNotch,
     blockSizeOfUcNotch);
+}
+
+void UcBpfInit(void){
+  arm_fir_init_f32(&instanceForUcBpf, numTapsOfUcBpf, (float32_t *)
+      coeffOfUcBpf,ucBpfStateArr,blockSizeofUcBpf);
+}
+
+void UcBpf(const float* inputToUcBpf, float* outputOfUcBpf){
+  arm_fir_f32(&instanceForUcBpf,inputToUcBpf,outputOfUcBpf,
+      blockSizeofUcBpf);
 }
 
 float UcRms(const float* inputToUcRms , size_t sizeOfInputRms){

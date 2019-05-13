@@ -13,11 +13,12 @@ void FhrPtBpfInit(void);
 void FhrPtDfInit(void);
 void UcLpfInit(void);
 void UcNotchFiltInit(void);
+void UcBpfInit(void);
 void UcRmsInterpInit(void);
 void UcThkInterpInit(void);
 
 void FhrBpf1045(const float* , const float*, float*, float*);
-void MhrBpfPt(const float* , float* );
+void MhrPtBpf(const float* , float* );
 void MhrPtDf(const float*, float*);
 void adaptFiltDownsampleFhr(const float*, const float* , float*, float* );
 void adaptFiltUpsampleFhr(const float*, const float* , float*, float* );
@@ -27,6 +28,7 @@ void FhrPtDf(const float* , float*);
 void UcLpf(const float*, float*);
 void UcNotchFilt(const float*, float*);
 float UcRms(const float*, size_t );
+void UcBpf(const float*, float*m);
 void UcRmsInterp(const float*, float* , int);
 void UcThkInterp(const float*, float* , int);
 
