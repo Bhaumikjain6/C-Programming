@@ -18,3 +18,4 @@ void upSampling(const float* , float* , size_t, size_t);        //verified
 void downSampling(const float* , float* , size_t, size_t);      //verified
 
 float dotProduct(const float* , const float*, size_t );         //verified
+void reverseArray(float* , size_t size); 

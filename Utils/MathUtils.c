@@ -121,3 +121,10 @@ float dotProduct(const float* signal1, const float* signal2, size_t size){
   }
   return sum;
 }
+
+void reverseArray(float* inputArray, size_t size){
+  int i = 0;
+  for(i = 0; i < size; ++i){
+    inputArray[i] = inputArray[size - 1];
+  }
+}
