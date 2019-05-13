@@ -1,3 +1,4 @@
+
 #include "2dArrayUitls.h"
 
 void createArray(int*** a , int rows , int cols){
@@ -135,6 +136,43 @@ int** matrixInverse(int** inputMatrix , size_t size){
     if(intputMatrix[0][0] != 1){
       divideFromMatrix(inputMatrix,size,size,inputMatrix[0][0]);
     }
-    
+
     det = determinant(inputMatrix , size);
+}
+
+float dotProduct(const float* signal1, const float* signal2, size_t size){
+  int sum = 0;
+  for (int i = 0; i < size; ++i) {
+    /* code */
+    sum += signal[i]*signal2[i];
+  }
+  return sum;
+}
+
+void arraysum(const float* a, const float* b, const size_t n, float* result)
+{
+    size_t idx;
+    for (idx = 0; idx < n; ++idx)
+    {
+        result[idx] = a[idx] + b[idx];
+    }
+}
+
+void upSampling(const float* signal, float* outputSignal ,size_t rate){
+    for(int i = 0; i < size_t; ){
+      outputSignal[i] = signal[k];
+      for(int j = 0; j < rate; j++){
+        outputSignal[i+j] = 0;
+      }
+      i += rate;
+    }
+}
+
+void downSampling(const float* signal, float* outputSignal, size_t size){
+  for (int i = 0; i < count; i++) {
+    /* code */
+     if(i % rate == 0){
+       outputSignal[i/rate] = signal[i];
+     }
+  }
 }
