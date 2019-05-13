@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swapElement(float* , float* );
-void sortD(float* , int);
-void sortI(float* , int);
+void swapElement(float* , float* );                 // verified
+void sortD(float* , int);                           //verified
+void sortI(float* , int);                           //verified
 
-void addElement(const float* , size_t size, float);
-void subtractElement(const float* , size_t size, float);
-void divideElement(const float* , size_t size, float);
-void arraysum(const float* , const float* , size_t, float*);
+void addElement( float* , size_t size, float);      //verified
+void subtractElement( float* , size_t size, float); //verified
+void divideElement( float* , size_t size, float);   //verified
+void arraysum(const float* , const float* ,const size_t, float*);
 
-void absf( float*, size_t);
-void findMax(const float* , size_t size);
-float mean(const float*, const size_t);
+void absf(float*, size_t);
+float findMax(const float* , size_t size);         //verified
+float mean(const float*, const size_t);            //verified
 
-void upSampling(const float* , float* , size_t);
-void downSampling(const float* , float* , size_t);
+void upSampling(const float* , float* , size_t, size_t);        //verified
+void downSampling(const float* , float* , size_t, size_t);      //verified
 
-void dotProduct(const float* , const float*, size_t ); 
+float dotProduct(const float* , const float*, size_t );         //verified
