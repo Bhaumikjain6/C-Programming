@@ -1,8 +1,25 @@
-#include "uc.c"
+#include "uc.h"
 
 static int timeCount = 0;
 static int rmsCount = 0;
 static int bpfCount = 0;
+
+void amplitudeCheck(float*outputOfUcRmsInterp, float* outputOfUcThkInterp, int* finalIndex, size_t sizeOfFinalIndex){
+  float maxInterpRms;
+  float maxInterpThk;
+
+  int i = 0;
+  for(i = 0; i < sizeOfFinalIndex; i += 2){
+    maxInterpRms = findMax(outputofUcRmsInterp + finalIndex[i], finalIndex[i+1]);
+    maxInterpThk = findMax(outputOfUcThkInterp + finalIndex[i], finalIndex[i+1]);
+
+    if(((maxInterpRms < 0) || (maxInterpThk < 0)) ||
+        (maxInterpThk > (1.085 * maxInterpRms))){
+      finalIndex[i] = 0;
+      finalIndex[i+1] = 0;
+    }
+  }
+}
 
 void algorithmUc(const float* V1, const float* V2, const float* V3, const float* V4){
     float inputToSmoothfilter[IPSIZE+50];
@@ -17,7 +34,9 @@ void algorithmUc(const float* V1, const float* V2, const float* V3, const float*
     float Btk[200];
     float Thk[200];
 
+    int finalIndex[100];
     int i = 0;
+    size_t intersectionSize = 0;
 
     for(i = 0; i < IPSIZE; ++i){
       inputToSmoothFilter[i] = V1[i] + V2[i] + V3[i] + V4[i];
@@ -68,6 +87,11 @@ void algorithmUc(const float* V1, const float* V2, const float* V3, const float*
           }
           UcThkInterp(Thk,outputOfUcThkInterp,35);
           multiplyElement(outputOfUcThkInterp, 35);
+          intersectionSize = (k * 35 > RMSPOINTS * 20) ? RMSPOINTS*20 : k * 35 ;
+          arraySubtract(outputOfUcThkInterp, outputOfUcRmsInterp,intersectionSize);
+          findSlopeChange(outputOfUcThkInterp,finalIndex,intersectionSize);
+          timeCheck(finalIndex, sizeOfFinalIndex, ucMinPeakDistance);
+          amplitudeCheck(outputOfUcRmsInterp, outputOfUcThkInterp, finalIndex, sizeOfFinalIndex);
 
         }
     }

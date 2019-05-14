@@ -45,3 +45,35 @@
 #define fhrMinPeakDistance                  158
 
 //// Variables related to FHR and Uc algorithm
+
+const eUSCI_SPI_MasterConfig spiMasterConfigA = {
+EUSCI_A_SPI_CLOCKSOURCE_SMCLK,             // SMCLK Clock Source
+        24000000,                                     // SMCLK = DCO = 3MHZ
+         8000000,                                    // SPICLK = 500khz
+        EUSCI_A_SPI_MSB_FIRST,                     // MSB First
+        EUSCI_A_SPI_PHASE_DATA_CHANGED_ONFIRST_CAPTURED_ON_NEXT,    // Phase
+        EUSCI_A_SPI_CLOCKPOLARITY_INACTIVITY_HIGH, // High polarity
+        EUSCI_A_SPI_3PIN                           // 3Wire SPI Mode
+        };
+
+const eUSCI_SPI_MasterConfig spiMasterConfigB = {
+EUSCI_B_SPI_CLOCKSOURCE_SMCLK,             // SMCLK Clock Source
+        24000000,                                     // SMCLK = DCO = 3MHZ
+        800000,                                    // SPICLK = 500khz
+        EUSCI_B_SPI_MSB_FIRST,                     // MSB First
+        EUSCI_B_SPI_PHASE_DATA_CHANGED_ONFIRST_CAPTURED_ON_NEXT,    // Phase
+        EUSCI_B_SPI_CLOCKPOLARITY_INACTIVITY_HIGH, // High polarity
+        EUSCI_B_SPI_3PIN                           // 3Wire SPI Mode
+        };
+
+const eUSCI_UART_Config uartConfig2 = {
+EUSCI_A_UART_CLOCKSOURCE_SMCLK,          // SMCLK Clock Source
+        13,                                     // BRDIV = 78
+        0,                                       // UCxBRF = 2
+        37,                                       // UCxBRS = 0
+        EUSCI_A_UART_NO_PARITY,                  // No Parity
+        EUSCI_A_UART_LSB_FIRST,                  // LSB First
+        EUSCI_A_UART_ONE_STOP_BIT,               // One stop bit
+        EUSCI_A_UART_MODE,                       // UART mode
+        EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION  // Oversampling
+        };

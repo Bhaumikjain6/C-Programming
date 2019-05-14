@@ -213,3 +213,10 @@ void arrayMultiply(float* input1, float input2, size_t size){
     input1[i] *= input2[i];
   }
 }
+
+void findSlopeChange(float* inputToInternalDiff, float* outputOfInternalDiff, size_t size){
+  int i = 0;
+  for(i = 0; i < size; ++i){
+      if()
+  }
+}

@@ -31,3 +31,7 @@ void createArray(float* , const float, size_t);
 void meanImputation(float* , float* , float* , size_t* );
 void smoothing(float* , float* , size_t , size_t);
 void appendArray(float* , float*, size_t);
+
+void findSlopeChange(float*, float*, size_t);
+void timeCheck(int*, size_t , size_t);
+void amplitudeCheck(float* , float* , int* ,);
