@@ -25,6 +25,16 @@ void clockInit(void)
     CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_2);
 }
 
+void interrupt_init(void)
+{
+    GPIO_clearInterruptFlag(GPIO_PORT_P2, GPIO_PIN4);
+    GPIO_enableInterrupt(GPIO_PORT_P2, GPIO_PIN4);
+    Interrupt_enableInterrupt(INT_PORT2);
+    GPIO_interruptEdgeSelect(GPIO_PORT_P2, GPIO_PIN4, GPIO_HIGH_TO_LOW_TRANSITION);
+
+    Interrupt_enableMaster();
+}
+
 void portInit(void)
 {
     //PORT 1

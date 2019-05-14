@@ -120,16 +120,6 @@ void downSample(const float* signal, float* outputSignal, size_t rate,size_t siz
   }
 }
 
-void arraysum(const float* a, const float* b, const size_t n, float* result)
-{
-    int i;
-    size_t idx;
-    for (idx = 0; idx < n; ++idx)
-    {
-        result[idx] = a[idx] + b[idx];
-    }
-}
-
 float dotProduct(const float* signal1, const float* signal2, size_t size){
   int sum = 0;
   int i;
@@ -196,22 +186,30 @@ void smoothing(float* inputToSmoothing, float* outputOfSmoothing, size_t size , 
     }
 }
 
-void arraySubtract(float* input1, float* input2, size_t size){
-    int i = 0;
-    for(i = 0; i < size; ++i){
-      input1[i] = input2[i] - input1[i];
-    }
-}
-
 void appendArray(float* input1, float* input2, size_t size){
     memcpy(input1, input2 , size * sizeOf(float));
 }
 
-void arrayMultiply(float* input1, float input2, size_t size){
+void arraysum(const float* a, const float* b, const size_t n, float* result)
+{
+    size_t idx;
+    for (idx = 0; idx < n; ++idx){
+        result[idx] = a[idx] + b[idx];
+    }
+}
+
+void arrayMultiply(float* input1, float* input2, size_t size){
   int i = 0;
   for( i = 0; i < size; ++i){
     input1[i] *= input2[i];
   }
+}
+
+void arraySubtract(float* input1, float* input2, size_t size){
+    int i = 0;
+    for(i = 0; i < size; ++i){
+      input1[i] -= input2[i];
+    }
 }
 
 void findSlopeChange(float* inputToInternalDiff, float* outputOfInternalDiff, size_t size){

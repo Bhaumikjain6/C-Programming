@@ -1,5 +1,7 @@
+/* Including the header file require */
 #include "commProto.h"
 
+/* Function definitions */
 uint8_t sendDataSpi(uint32_t moduleInstance, uint8_t txd){
   while(!(moduleInstance->IFG));
   SPI_transmitData(moduleInstance,txd);

@@ -1,3 +1,12 @@
+/*
+  The following Header files includes all the necessary CMSIS and
+  microController specific Library fils.
+
+  Created on 14/05/2019
+  Authors : bhaumik@janitri.in
+          : neha@janitri.in
+*/
+
 #include <ti/devices/msp432p4xx/inc/msp.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <arm_math.h>
@@ -15,3 +24,4 @@
 #include <time.h>
 #include <float.h>
 #include <math.h>
+#include "variables.h"
