@@ -45,7 +45,6 @@
 #define fhrMinPeakDistance                  158
 
 //// Variables related to FHR and Uc algorithm
-
 const eUSCI_SPI_MasterConfig spiMasterConfigA = {
 EUSCI_A_SPI_CLOCKSOURCE_SMCLK,             // SMCLK Clock Source
         24000000,                                     // SMCLK = DCO = 3MHZ
