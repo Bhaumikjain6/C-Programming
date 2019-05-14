@@ -1,8 +1,8 @@
+/* Includes the required files for following functions*/
 #include "includeFiles.h"
 #include "adc.h"
 #include "lcd.h"
 #include "variables.h"
-
 /*
   The functions in the following source file are dependent on several
   functions:

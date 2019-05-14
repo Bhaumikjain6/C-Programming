@@ -1,5 +1,5 @@
+/* Includes the required files for following functions*/
 #include "pantompkins.h"
-
 //*****************************************************************************
 //! The following functions contains the Algorithm to calculate the
 //! Maternal and the Fetal Heart Rate.

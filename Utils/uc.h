@@ -1,3 +1,5 @@
+/* Includes the required files for following functions*/
+/*****************************************************************************/
 #include "DspInit.h"
 //*****************************************************************************
 //! The pantompkins algorithm for calculating the number of Contractions.

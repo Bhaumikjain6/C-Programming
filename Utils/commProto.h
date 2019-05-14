@@ -6,12 +6,11 @@
   -> SPI_receieveData();
   -> SPI_transmitData();
   -> UART_transmitData();
-
 */
+/* Includes the header files required for the following functions */
 #include <spi.h>
 #include <uart.h>
 #include "variables.h"
-
 //*****************************************************************************
 //! Can be used to send data over SPI.
 //! Call spiInit functions respectively before calling this function.

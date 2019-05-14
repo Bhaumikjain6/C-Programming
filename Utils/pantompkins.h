@@ -1,6 +1,7 @@
+/* Includes the required files for following functions*/
 #include "MathUtils.h"
 #include "DspInit.h"
-
+/*****************************************************************************/
 /*
   This function is dependent on the following functions:
   -> mean();                     -> convolution();

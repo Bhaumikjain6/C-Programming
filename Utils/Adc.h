@@ -2,10 +2,9 @@
     The Adc functions are dependent on the following functions:
     -> sendDataSpi;
 */
-
+/* Including the required header files for following functions*/
 #include "commProto.h"
 #include "includeFiles.h"
-
 //*****************************************************************************
 //  The following function writes into the register of the ADC.
 //  \param : The first parameter takes the starting address of the
@@ -17,7 +16,6 @@
 //  \return None
 //*****************************************************************************
 void adcWrite2op(uint8_t, uint8_t , uint8_t);
-
 //*****************************************************************************
 //  Resets the ADC module
 //  \param  None

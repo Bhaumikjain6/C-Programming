@@ -1,15 +1,16 @@
+
+/* Includes the required files for following functions*/
+/******************************************************************************/
 #include <stdio.h>
 #include <arm_math.h>
 #include <arm_const_structs.h>
 #include <arm_common_tables.h>
+/******************************************************************************/
 
-//// Constants /////
-
+/********Constants*************************************************************/
 #define blockLength                         516
 #define IPSIZE                              500
-
-//// Constants related to UC algorithm
-
+/********Constants related to UC algorithm*************************************/
 #define blockSizeOfUcThkInterp              181
 #define ucThkUpsampleFactor                 35
 #define numTapsOfUcThkInterp                245
@@ -23,8 +24,7 @@
 #define blockSizeOfUcLpf                    550
 #define numTapsOfUcBpf                      16
 #define blockSizeofUcBpf                    54
-
-//// Constants related to FHR algorithm
+/********Constants related to FHR algorithm*************************************/
 #define blockSizeOfFhrPtDf                  516
 #define numTapsOfFhrPtDf                    13
 #define blockSizeOfFhrPtBpf                 516

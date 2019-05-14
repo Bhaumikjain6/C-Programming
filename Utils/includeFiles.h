@@ -6,7 +6,8 @@
   Authors : bhaumik@janitri.in
           : neha@janitri.in
 */
-
+/* Includes the required files for following functions*/
+/*******************************************************************************/
 #include <ti/devices/msp432p4xx/inc/msp.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <arm_math.h>
@@ -25,3 +26,4 @@
 #include <float.h>
 #include <math.h>
 #include "variables.h"
+/*******************************************************************************/

@@ -1,5 +1,5 @@
+/* Includes the required files for following functions*/
 #include "deviceInit.h"
-
 /*
    * The functions associated with the LCD are dependent on other functions
      such as:
