@@ -1,4 +1,6 @@
 #include "MathUtils.h"
+#include "DspInit.h"
+
 /*
   This function is dependent on the following functions:
   -> mean();                     -> convolution();
@@ -13,5 +15,3 @@
 
 void pantompkinsMhr(const float*, const size_t, int* , size_t* );
 void pantompkinsFhr(const float *, size_t , int* , size_t*);
-
-void createNewQrs(float* , )

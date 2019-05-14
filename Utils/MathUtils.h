@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "includeFiles.h"
 
 void swapElement(float* , float* );                 // verified
 void sortD(float* , int);                           //verified

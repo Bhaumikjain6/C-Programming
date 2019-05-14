@@ -243,5 +243,10 @@ void AdcInit(void){
     adcWrite2op(0x4A, 0x00, 0x60);   //Writing into CH6SET
     adcWrite2op(0x4B, 0x00, 0x60);   //Writing into CH7SET
     adcWrite2op(0x4C, 0x00, 0x60);   //Writing into CH8SET
+}
 
+void delay_us(unsigned long timeInMicroSeconds){
+  timeInMicroSeconds = (timeInMicroSeconds * 298 * 5 *27) / 1000;
+  while(i)
+    i--;
 }

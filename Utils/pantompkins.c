@@ -78,8 +78,8 @@ void pantompkinsFhr(const float* outputOfMatchFilt, size_t blockLength, int* fhr
   if(rate == 0 || (rate < mhrRate)){
       rate = previousRate;
   }
-
   previousRate = rate;
+
   if((idx1 >= 1)){
       average_fhr = moving_window_average(fhr_moving_average_array, rate,1);
   }

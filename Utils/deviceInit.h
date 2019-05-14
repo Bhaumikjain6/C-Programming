@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "includeFiles.h"
 #include "adc.h"
 #include "lcd.h"
 #include "variables.h"
@@ -17,7 +15,6 @@
 */
 
 // Device Setup
-void clockInit(void);
 void portInit(void);
 void interruptInit(void);
 
@@ -31,3 +28,5 @@ void uartInitA2(void);
 // Initializing Peripherals
 void LcdInit(void);
 void AdcInit(void);
+
+void delay_us(unsigned long timeInMicroSeconds);

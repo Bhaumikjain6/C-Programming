@@ -66,10 +66,6 @@ void adaptFiltUpsampleInit(void){
   //Resample-Upsample
   arm_fir_init_f32(&InstanceforMhrAdaptFiltUS, numTapsOfAdaptFiltUS, (float32_t *) coeffOfAdaptFiltUS,
                  &mhrAdaptFiltUSStatearr, blockSizeOfAdaptFiltUS);
-
-  //Resample-Downsample-FHR
-  arm_fir_init_f32(&InstanceforFhrAdaptFiltUS, numTapsOfAdaptFiltUS, (float32_t *) &coeffOfAdaptFiltUS,
-                 &fhrAdaptFiltUSStatearr, blockSizeOfAdaptFiltUS);
 }
 
 void adaptFiltUpsampleFhr(const float* mhrInputToAdaptUS, float* mhrOutputOfAdaptUS){
@@ -77,7 +73,6 @@ void adaptFiltUpsampleFhr(const float* mhrInputToAdaptUS, float* mhrOutputOfAdap
     //Upsample by a factor of 2
     arm_fir_f32(&InstanceforMhrAdaptFiltUS, mhrInputToAdaptUS, mhrOutputOfAdaptUS,
     blockSizeOfAdaptFiltUS);
-
 }
 
 void matchFilterFhrInit(const float* coeffOfMatchFilt){
@@ -148,6 +143,7 @@ void UcBpfInit(void){
 }
 
 void UcBpf(const float* inputToUcBpf, float* outputOfUcBpf){
+  UcBpfInit();
   arm_fir_f32(&instanceForUcBpf,inputToUcBpf,outputOfUcBpf,
       blockSizeofUcBpf);
 }

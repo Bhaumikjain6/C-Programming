@@ -5,6 +5,9 @@
 
 //// Constants /////
 
+#define blockLength                         516
+#define IPSIZE                              500
+
 //// Constants related to UC algorithm
 
 #define blockSizeOfUcThkInterp              181
@@ -39,7 +42,6 @@
 #define numTapsOfBpf1045                    48
 #define blockSizeOfFhr1045                  500
 
-#define IPSIZE                              500
 #define NEWQRSRANGE                         39
 #define mhrMinPeakDistance                  250
 #define fhrMinPeakDistance                  158

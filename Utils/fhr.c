@@ -52,6 +52,7 @@ void algorithmFhr(float* V1n, float* V4n){
 
   adaptFiltDownsampleFhr(mhrInputToAdaptDS,fhrInputToAdaptDS,mhrOutputOfAdaptDS,
            fhrOutputOfAdaptDS);
+
   lms(mhrOutputOfAdaptDS,fhrOutputOfAdaptDS);
   adaptFiltUpsampleFhr(outputOfLms, fhrOutputOfAdaptUS);
 

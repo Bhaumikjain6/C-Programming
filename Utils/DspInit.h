@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "variables.h"
 #include "MathUtils.h"
+#incldue "includeFiles.h"
 
 void FhrBpf1045Init(void);
 void MhrPtBpfInit(void);

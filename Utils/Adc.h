@@ -1,5 +1,5 @@
-#include "myspi.h"
-#include
+#include "commProto.h"
+#include "includeFiles.h"
 
 /*
     The Adc functions are dependent on the following functions:
