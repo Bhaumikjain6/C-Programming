@@ -1,6 +1,6 @@
 #include "Adc.h"
 
-void adcWrite2op(uint8_t op1, uint8_t op2, uint8_t txd)
+extern void adcWrite2op(uint8_t op1, uint8_t op2, uint8_t txd)
 {
     int l;
     GPIO_setOutputLowOnPin(GPIO_PORT_P3, GPIO_PIN6);
@@ -14,7 +14,7 @@ void adcWrite2op(uint8_t op1, uint8_t op2, uint8_t txd)
     for (l = 0; l < 800; l++);
 }
 
-void resetAdc(void){
+extern void resetAdc(void){
   int i;
   i = 100000;
   while (i){
@@ -29,7 +29,7 @@ void resetAdc(void){
   GPIO_setOutputHighOnPin(GPIO_PORT_P3, GPIO_PIN0);
 }
 
-void sdatac(void)
+extern void sdatac(void)
 {
     uint8_t txd;
     int l;

@@ -1,6 +1,6 @@
 #include "DspInit.h"
 
-void FhrBpf1045Init(void){
+void hrBpf1045Init(void){
     //10-45 BPF MHR
     arm_fir_init_f32(&InstanceforMhrBpf1045, numTapsOfBpf1045, (float32_t *) CoeffOfFhr1045Bpf,
                    mhrBpf1045Statearr, blockSizeOfFhr1045);

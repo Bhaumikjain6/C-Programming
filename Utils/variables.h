@@ -1,3 +1,5 @@
+#ifndef variables_H
+#define variables_H
 
 /* Includes the required files for following functions*/
 /******************************************************************************/
@@ -78,3 +80,5 @@ EUSCI_A_UART_CLOCKSOURCE_SMCLK,          // SMCLK Clock Source
         EUSCI_A_UART_MODE,                       // UART mode
         EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION  // Oversampling
         };
+
+#endif

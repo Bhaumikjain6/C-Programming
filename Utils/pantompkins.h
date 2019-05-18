@@ -1,3 +1,6 @@
+#ifndef pantompkins_H
+#define pantompkins_H
+
 /* Includes the required files for following functions*/
 #include "MathUtils.h"
 #include "DspInit.h"
@@ -8,7 +11,7 @@
   -> subtractElement();          -> findPeaks();
   -> MhrPtBpf();                 -> sortI();
   -> absf();                     -> computeHeartRate();
-  -> divideElement();            -> moving_window_average();
+  -> diextern voidElement();            -> moving_window_average();
   -> findMax();
   -> MhrPtDf();
   -> squareArray();
@@ -24,7 +27,7 @@
 //!         maternal Peaks.
 //! \return None
 //*****************************************************************************
-void pantompkinsMhr(const float* mhrInputToPt, const size_t sizeOfArray,
+extern void pantompkinsMhr(const float* mhrInputToPt, const size_t sizeOfArray,
                 int* mhrLocs , size_t* mhrCount);
 //*****************************************************************************
 //! The pantompkins algorithm for calculating the maternal Peaks and
@@ -37,5 +40,7 @@ void pantompkinsMhr(const float* mhrInputToPt, const size_t sizeOfArray,
 //!         fetal Peaks.
 //! \return None
 //*****************************************************************************
-void pantompkinsFhr(const float* fhrInputToPt, size_t sizeOfArray,
+extern void pantompkinsFhr(const float* fhrInputToPt, size_t sizeOfArray,
                 int* fhrLocs, size_t* fhrCount);
+
+#endif

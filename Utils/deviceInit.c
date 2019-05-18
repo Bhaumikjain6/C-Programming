@@ -1,6 +1,6 @@
 #include "deviceInit.h"
 
-void clockInit(void)
+extern void clockInit(void)
 {
     /* Configuring pins for peripheral/crystal usage and LED for output */
     GPIO_setAsPeripheralModuleFunctionOutputPin(
@@ -25,7 +25,7 @@ void clockInit(void)
     CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_2);
 }
 
-void interrupt_init(void)
+extern void interrupt_init(void)
 {
     GPIO_clearInterruptFlag(GPIO_PORT_P2, GPIO_PIN4);
     GPIO_enableInterrupt(GPIO_PORT_P2, GPIO_PIN4);
@@ -35,7 +35,7 @@ void interrupt_init(void)
     Interrupt_enableMaster();
 }
 
-void portInit(void)
+extern void portInit(void)
 {
     //PORT 1
     GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN0);
@@ -121,7 +121,7 @@ void portInit(void)
     GPIO_setOutputHighOnPin(GPIO_PORT_P10, GPIO_PIN0);
 }
 
-void spiInitA1(void){
+extern void spiInitA1(void){
   // Selecting P1.5 P1.6 and P1.7 in SPI mode
   GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P2,
   GPIO_PIN1 | GPIO_PIN2 | GPIO_PIN3,
@@ -132,7 +132,7 @@ void spiInitA1(void){
   SPI_enableModule(EUSCI_A1_BASE);
 }
 
-void spiInitA3(void){
+extern void spiInitA3(void){
   // Selecting P1.5 P1.6 and P1.7 in SPI mode
   GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P9,
   GPIO_PIN5 | GPIO_PIN6 | GPIO_PIN7,
@@ -144,7 +144,7 @@ void spiInitA3(void){
   SPI_enableModule(EUSCI_A3_BASE);
 }
 
-void spiInitB3(void){
+extern void spiInitB3(void){
   // Selecting P1.5 P1.6 and P1.7 in SPI mode
   GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P10,
   GPIO_PIN1 | GPIO_PIN2 | GPIO_PIN3,
@@ -156,7 +156,7 @@ void spiInitB3(void){
   SPI_enableModule(EUSCI_B3_BASE);
 }
 
-void uartInitA2(void){
+extern void uartInitA2(void){
   /* Selecting P1.2 and P1.3 in UART mode and P1.0 as output (LED) */
   MAP_GPIO_setAsPeripheralModuleFunctionInputPin(
           GPIO_PORT_P3,
@@ -172,7 +172,7 @@ void uartInitA2(void){
   MAP_UART_enableModule(EUSCI_A2_BASE);
 }
 
-void LCDInit(void){
+extern void LCDInit(void){
     uint8_t txd;
 
     GPIO_setOutputLowOnPin(GPIO_PORT_P9, GPIO_PIN2);
@@ -228,7 +228,7 @@ void LCDInit(void){
     clrscr();
 }
 
-void AdcInit(void){
+extern void AdcInit(void){
     resetAdc();
 
     delay_us(2000);

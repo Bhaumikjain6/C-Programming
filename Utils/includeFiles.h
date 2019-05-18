@@ -1,3 +1,5 @@
+#ifndef includeFiles_H
+#define includeFiles_H
 /*
   The following Header files includes all the necessary CMSIS and
   microController specific Library fils.
@@ -27,3 +29,4 @@
 #include <math.h>
 #include "variables.h"
 /*******************************************************************************/
+#endif

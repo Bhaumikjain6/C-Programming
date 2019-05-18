@@ -1,3 +1,6 @@
+#ifndef deviceInit_H
+#define deviceInit_H
+
 /* Includes the required files for following functions*/
 #include "includeFiles.h"
 #include "adc.h"
@@ -20,14 +23,14 @@
 //! \param None
 //  \return None
 //*****************************************************************************
-void portInit(void);
+extern void portInit(void);
 //*****************************************************************************
 //! Is Used for Initializing the interrupt pins.
 //! Enables the Interrupt on the respective PORT.
 //! \param None
 //  \return None
 //*****************************************************************************
-void interruptInit(void);
+extern void interruptInit(void);
 //*****************************************************************************
 // Initializing Communication Procotols
 //*****************************************************************************
@@ -36,28 +39,28 @@ void interruptInit(void);
 //! \param None
 //  \return None
 //*****************************************************************************
-void spiInitA3(void);
+extern void spiInitA3(void);
 //*****************************************************************************
 //! Intializes and Enables the respective SPI module.
 //! Before Initializing check if the SPI configuration is according to the use.
 //! \param None
 //  \return None
 //*****************************************************************************
-void spiInitA1(void);
+extern void spiInitA1(void);
 //*****************************************************************************
 //! Intializes and Enables the respective SPI module.
 //! Before Initializing check if the SPI configuration is according to the use.
 //! \param None
 //  \return None
 //*****************************************************************************
-void spiInitB3(void);
+extern void spiInitB3(void);
 //*****************************************************************************
 //! Intializes and Enables the respective UART module.
 //! Before Initializing check if the UART configuration is according to the use.
 //! \param None
 //  \return None
 //*****************************************************************************
-void uartInitA2(void);
+extern void uartInitA2(void);
 //*****************************************************************************
 // Initializing Peripherals
 //*****************************************************************************
@@ -67,7 +70,7 @@ void uartInitA2(void);
 //! \param None
 //  \return None
 //*****************************************************************************
-void LcdInit(void);
+extern void LcdInit(void);
 //*****************************************************************************
 //! Intializes and Enables the ADC module.
 // ! <br> The SPI module for the ADC module is enabled.
@@ -75,10 +78,12 @@ void LcdInit(void);
 //! \param None
 //  \return None
 //*****************************************************************************
-void AdcInit(void);
+extern void AdcInit(void);
 //*****************************************************************************
 //!  A delay function in  Micro seconds
 //! \param unsigned long Giving a delay of timeInMicroSeconds us.
 //  \return None
 //*****************************************************************************
-void delay_us(unsigned long timeInMicroSeconds);
+extern void delay_us(unsigned long timeInMicroSeconds);
+
+#endif

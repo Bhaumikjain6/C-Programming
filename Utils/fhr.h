@@ -1,3 +1,6 @@
+#ifndef fhr_H
+#define fhr_H
+
 /* Includes the required files for following functions*/
 #include "pantompkins.h"
 //*****************************************************************************
@@ -10,4 +13,6 @@
 //! The algorithm stores the Fetal and Maternal heart rates in a static array.
 //  \return None
 //*****************************************************************************
-void algorithmFhr(float* , float*);
+extern void algorithmFhr(float* , float*);
+
+#endif

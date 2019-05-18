@@ -1,3 +1,5 @@
+#ifndef MathUtils_H
+#define MathUtils_H
 /* Includes the required files for following functions*/
 #include "includeFiles.h"
 //*****************************************************************************
@@ -9,15 +11,15 @@
 //!         For ex: swapElement(&A,&B);
 //  \return None
 //*****************************************************************************
-void swapElement(float* inputA , float* inputB);                 // verified
+extern void swapElement(float* inputA , float* inputB);                 // verified
 //*****************************************************************************
 //! The function sorts a given float array in Descending Order
-//!
+//!extern void
 //! \param: Array which has to be sorted
 //!         For ex: sortD(A,516);
 //  \return None
 //*****************************************************************************
-void sortD(float* ToBeSorted, int sizeOfArray);                           //verified
+extern void sortD(float* ToBeSorted, int sizeOfArray);                           //verified
 //*****************************************************************************
 //! The function sorts a given float array in Ascending Order
 //!
@@ -25,7 +27,7 @@ void sortD(float* ToBeSorted, int sizeOfArray);                           //veri
 //!         For ex: sortI(A,516);
 //  \return None
 //*****************************************************************************
-void sortI(float* ToBeSorted, int sizeOfArray);                           //verified
+extern void sortI(float* ToBeSorted, int sizeOfArray);                           //verified
 //*****************************************************************************
 //! The function adds the given Elements to the float array.
 //!
@@ -36,7 +38,7 @@ void sortI(float* ToBeSorted, int sizeOfArray);                           //veri
 //!         For ex: addElement(A,516,(float)5);
 //  \return None
 //*****************************************************************************
-void addElement( float* inputArray, size_t sizeOfArray, float toBeAdded);      //verified
+extern void addElement( float* inputArray, size_t sizeOfArray, float toBeAdded);      //verified
 //*****************************************************************************
 //! The function subtracts the given Elements to the float array.
 //!
@@ -47,7 +49,7 @@ void addElement( float* inputArray, size_t sizeOfArray, float toBeAdded);      /
 //!         For ex: subtractElement(A,516,(float)5);
 //  \return None
 //*****************************************************************************
-void subtractElement( float* inputArray , size_t sizeOfArray, float toBeSubtracted); //verified
+extern void subtractElement( float* inputArray , size_t sizeOfArray, float toBeSubtracted); //verified
 //*****************************************************************************
 //! The function divides the given Elements to the float array.
 //!
@@ -58,7 +60,7 @@ void subtractElement( float* inputArray , size_t sizeOfArray, float toBeSubtract
 //!         For ex: divideElement(A,516,(float)5);
 //  \return None
 //*****************************************************************************
-void divideElement(float* inputArray , size_t sizeOfArray, float tobeDivied);   //verified
+extern void divideElement(float* inputArray , size_t sizeOfArray, float tobeDivied);   //verified
 //*****************************************************************************
 //! The function multiplies the given Elements to the float array.
 //!
@@ -69,7 +71,7 @@ void divideElement(float* inputArray , size_t sizeOfArray, float tobeDivied);   
 //!         For ex: multiplyElement(A,516,(float)5);
 //  \return None
 //*****************************************************************************
-void multiplyElement(float* inputArray, size_t sizeOfArray, float toBeMultiplied);
+extern void multiplyElement(float* inputArray, size_t sizeOfArray, float toBeMultiplied);
 //*****************************************************************************
 //! The function takes the sum of two arrays and puts into other array
 //!
@@ -78,7 +80,7 @@ void multiplyElement(float* inputArray, size_t sizeOfArray, float toBeMultiplied
 //! \param: The destination array.
 //  \return None
 //*****************************************************************************
-void arraysum(const float* sourceArray1, const float* sourceArray2 ,
+extern void arraysum(const float* sourceArray1, const float* sourceArray2 ,
                 const size_t sizeOfArray, float* destionationArray);           //verified
 //*****************************************************************************
 //! The function takes the difference of two arrays and puts into other array
@@ -88,7 +90,7 @@ void arraysum(const float* sourceArray1, const float* sourceArray2 ,
 //! <br> The destination array is the first array itself.
 //  \return None
 //*****************************************************************************
-void arraySubtract(float* sourceArray1,float* sourceArray2,size_t sizeOfArray);         //verified
+extern void arraySubtract(float* sourceArray1,float* sourceArray2,size_t sizeOfArray);         //verified
 //*****************************************************************************
 //! The function takes the multplication of two arrays and puts into other array
 //!
@@ -97,7 +99,7 @@ void arraySubtract(float* sourceArray1,float* sourceArray2,size_t sizeOfArray); 
 //! <br> The destination array is the first array itself.
 //  \return None
 //*****************************************************************************
-void arrayMultiply(float* sourceArray1, float* sourceArray2, size_t sizeOfArray);       //verified
+extern void arrayMultiply(float* sourceArray1, float* sourceArray2, size_t sizeOfArray);       //verified
 //*****************************************************************************
 //! The function takes the absolute of the float Array
 //!
@@ -106,7 +108,7 @@ void arrayMultiply(float* sourceArray1, float* sourceArray2, size_t sizeOfArray)
 //! <br> The destination array is the first array itself.
 //  \return None
 //*****************************************************************************
-void absf(float* sourceArray1, size_t sizeOfArray);
+extern void absf(float* sourceArray1, size_t sizeOfArray);
 //*****************************************************************************
 //! The function finds the maximum element of the given array.
 //!
@@ -131,7 +133,7 @@ float findMin(const float* sourceArray1, size_t sizeOfArray);
 //
 //  \return The mean of the given array.
 //*****************************************************************************
-float mean(const float* sourceArray1, const size_t sizeOfArray);            //verified
+extern float mean(const float* sourceArray1, const size_t sizeOfArray);            //verified
 //*****************************************************************************
 //! The function upsamples the source Array by appending zeroes.
 //!
@@ -143,7 +145,7 @@ float mean(const float* sourceArray1, const size_t sizeOfArray);            //ve
 //! \param: The size of the given source array.
 //  \return None
 //*****************************************************************************
-void upSample(const float* sourceArray1, float* destionationArray
+extern void upSample(const float* sourceArray1, float* destionationArray
           ,size_t upsampleFactor, size_t sizeOfArray);        //verified
 //*****************************************************************************
 //! The function downsamples the source Array by appending zeroes.
@@ -156,7 +158,7 @@ void upSample(const float* sourceArray1, float* destionationArray
 //! \param: The size of the given source array.
 //  \return None
 //*****************************************************************************
-void downSample(const float* sourceArray1, float* destionationArray,
+extern void downSample(const float* sourceArray1, float* destionationArray,
             size_t downSampleFactor, size_t sizeOfArray);      //verified
 //*****************************************************************************
 //! The function takes the vector dot product of the two source Arrays/
@@ -165,7 +167,7 @@ void downSample(const float* sourceArray1, float* destionationArray,
 //!    <br> Both the array should be of some datatype and same size.
 //  \return The dot product of the given array.
 //*****************************************************************************
-float dotProduct(const float* sourceArray1, const float* sourceArray2,
+extern float dotProduct(const float* sourceArray1, const float* sourceArray2,
             size_t sizeOfArray );         //verified
 //*****************************************************************************
 //! The function reverses Elements by reversing the index values.
@@ -175,7 +177,7 @@ float dotProduct(const float* sourceArray1, const float* sourceArray2,
 //! \param: The size of the source array.
 //  \return None
 //*****************************************************************************
-void reverseArray(float* sourceArray, size_t sizeOfArray);
+extern void reverseArray(float* sourceArray, size_t sizeOfArray);
 //*****************************************************************************
 //! The function squares Elements by squaring the individual values.
 //!
@@ -184,7 +186,7 @@ void reverseArray(float* sourceArray, size_t sizeOfArray);
 //! \param: The size of the source array.
 //  \return None
 //*****************************************************************************
-void squareArray(float* sourceArray, size_t sizeOfArray);
+extern void squareArray(float* sourceArray, size_t sizeOfArray);
 //*****************************************************************************
 //! The function configures all the elements of the source Array to a fixed
 //! value.
@@ -196,7 +198,7 @@ void squareArray(float* sourceArray, size_t sizeOfArray);
 //! \param: The number of the elements that have to be altered.
 //  \return None
 //*******************************************************d**********************
-void createArray(float* sourceArray, const float initialValue, size_t sizeOfArray);
+extern void createArray(float* sourceArray, const float initialValue, size_t sizeOfArray);
 //*****************************************************************************
 //! The function substitutes the value of an array by 'n' times.
 //!
@@ -206,7 +208,7 @@ void createArray(float* sourceArray, const float initialValue, size_t sizeOfArra
 //! \param: The number of times the substitution occurs.
 //  \return None
 //*****************************************************************************
-void meanImputation(float* destionationArray, float* ValuesToBeSubstitued
+extern void meanImputation(float* destionationArray, float* ValuesToBeSubstitued
                 ,float* IntialIndex, size_t* noOfSubstituition);
 //*****************************************************************************
 //! The function is a moving average function of window size.
@@ -217,7 +219,7 @@ void meanImputation(float* destionationArray, float* ValuesToBeSubstitued
 //! \param: The window size of the moving average filter
 //  \return None
 //*****************************************************************************
-void smoothing(float* sourceArray, float* destionationArray,
+extern void smoothing(float* sourceArray, float* destionationArray,
             size_t sizeOfArray , size_t windowSize);
 //*****************************************************************************
 //! The function copies the data from the source Array to the destination array.
@@ -226,7 +228,7 @@ void smoothing(float* sourceArray, float* destionationArray,
 //! \paran: The size of the Array.
 //  \return None
 //*****************************************************************************
-void appendArray(float* destinationArray, float* sourceArray, size_t sizeOfArray);
+extern void appendArray(float* destinationArray, float* sourceArray, size_t sizeOfArray);
 //*****************************************************************************
 //! The function finds the slope change from the sourceArray by comparing The
 //! difference of neighbouring values.
@@ -237,7 +239,7 @@ void appendArray(float* destinationArray, float* sourceArray, size_t sizeOfArray
 //! \param: The size of the sourceArray.
 //  \return None
 //*****************************************************************************
-void findSlopeChange(float* sourceArray, float* destinationArray, size_t sizeOfArray);
+extern void findSlopeChange(float* sourceArray, float* destinationArray, size_t sizeOfArray);
 //*****************************************************************************
 //! The function does the 30s check between two simultaneous contraction
 //! indexes.
@@ -246,7 +248,7 @@ void findSlopeChange(float* sourceArray, float* destinationArray, size_t sizeOfA
 //! /param: The minimum difference beween the Contraction indexes.
 //! \return None
 //*****************************************************************************
-void timeCheck(int*, size_t , size_t);
+extern void timeCheck(int*, size_t , size_t);
 //*****************************************************************************
 //! The function does the amplitude check between the Rms interpolation array
 //! and Thresholding interpolation values respectively.
@@ -259,3 +261,5 @@ void timeCheck(int*, size_t , size_t);
 //  \return None
 //*****************************************************************************
 void amplitudeCheck(float* , float* , int* ,);
+
+#endif

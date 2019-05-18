@@ -1,3 +1,5 @@
+#ifndef Adc_H
+#define Adc_H
 /*
     The Adc functions are dependent on the following functions:
     -> sendDataSpi;
@@ -15,16 +17,18 @@
 //            in the register.
 //  \return None
 //*****************************************************************************
-void adcWrite2op(uint8_t, uint8_t , uint8_t);
+extern void adcWrite2op(uint8_t, uint8_t , uint8_t);
 //*****************************************************************************
 //  Resets the ADC module
 //  \param  None
 //  \return None
 //*****************************************************************************
-void resetAdc(void);
+extern void resetAdc(void);
 //*****************************************************************************
 //  Stops read Data Continous Mode.
 //  \param None
 //  \return None
 //*****************************************************************************
-void sdatac(void);
+extern void sdatac(void);
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef commProto_H
+#define commProto_H
 /*
   The following Header files includes functions for the communication
   protocols.
@@ -25,7 +27,7 @@
 //!             uint8_t;
 //  \return : The data received to the SPI module
 //*****************************************************************************
-uint8_t sendDataSpi(uint32_t moduleInstance, uint8_t TxD);
+extern uint8_t sendDataSpi(uint32_t moduleInstance, uint8_t TxD);
 //*****************************************************************************
 //! Can be used to send data over UART.
 //! Call UARTInit functions respectively before calling this function.
@@ -40,4 +42,6 @@ uint8_t sendDataSpi(uint32_t moduleInstance, uint8_t TxD);
 //!             uint8_t;
 //  \return : None
 //*****************************************************************************
-void sendDataUart(uint32_t moduleInstance, uint8_t);
+extern void sendDataUart(uint32_t moduleInstance, uint8_t);
+
+#endif

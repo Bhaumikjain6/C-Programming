@@ -1,3 +1,6 @@
+#ifndef uc_H
+#define uc_H
+
 /* Includes the required files for following functions*/
 /*****************************************************************************/
 #include "DspInit.h"
@@ -7,5 +10,7 @@
 //! /param: The V1 ,V2, V3 and V4 array to be passed to the Uc Algorithm.
 //! \return None
 //*****************************************************************************
-void algorithmUc(const float* V1, const float* V2,
+extern void algorithmUc(const float* V1, const float* V2,
               const float* V3, const float* V4);
+
+#endif

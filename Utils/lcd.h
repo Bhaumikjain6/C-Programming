@@ -1,3 +1,5 @@
+#ifndef lcd_H
+#define lcs_H
 /* Includes the required files for following functions*/
 #include "deviceInit.h"
 /*
@@ -12,4 +14,5 @@
 //! \param None
 //  \return None
 //*****************************************************************************
-void clrscr(void);
+extern void clrscr(void);
+#endif
