@@ -22,7 +22,7 @@ void MhrPtBpfInit(){
 
 
 void MhrPtBpf(const float* inputToBpf, float* outputOfBpf){
-    MhrBpfPtInit();
+    MhrPtBpfInit();
     arm_fir_f32(&InstanceforMhrPtBpf, inputToBpf, outputOfBpf,
     blockSizeOfMhrPtBpf);
 }
@@ -33,7 +33,7 @@ void MhrPtDfInit(void){
 }
 
 void MhrPtDf(const float* inputToMhrPtDf, float* outputOfMhrPtDf){
-  MhrDfPtInit();
+  MhrPtDfInit();
   arm_fir_f32(&InstanceforMhrPtDf, inputToMhrPtDf, outputOfMhrPtDf,
               blockSizeOfMhrPtDf);
 }
