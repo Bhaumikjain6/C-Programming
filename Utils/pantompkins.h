@@ -4,6 +4,7 @@
 /* Includes the required files for following functions*/
 #include "MathUtils.h"
 #include "DspInit.h"
+#include "heartRateUtils.h"
 /*****************************************************************************/
 /*
   This function is dependent on the following functions:
@@ -41,6 +42,6 @@ extern void pantompkinsMhr(const float* mhrInputToPt, const size_t sizeOfArray,
 //! \return None
 //*****************************************************************************
 extern void pantompkinsFhr(const float* fhrInputToPt, size_t sizeOfArray,
-                int* fhrLocs, size_t* fhrCount);
+                int* fhrLocs, size_t* fhrCount, size_t* mhrCount);
 
 #endif

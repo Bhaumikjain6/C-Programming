@@ -4,11 +4,21 @@
 /* Includes the required files for following functions*/
 /******************************************************************************/
 #include <stdio.h>
+#include <stddef.h>
+#include <string.h>
+#include <spi.h>
+#include <uart.h>
+#include <gpio.h>
+#include <pcm.h>
+#include <cs.h>
+#include <flash_a.h>
+#include <interrupt.h>
+#include <rom_map.h>
 #include <arm_math.h>
+#include <msp432p4111.h>
 #include <arm_const_structs.h>
 #include <arm_common_tables.h>
 /******************************************************************************/
-
 /********Constants*************************************************************/
 #define blockLength                         516
 #define IPSIZE                              500
@@ -25,12 +35,13 @@
 #define numTapsOfUcLpf                      51
 #define blockSizeOfUcLpf                    550
 #define numTapsOfUcBpf                      16
-#define blockSizeofUcBpf                    54
+#define blockSizeofUcBpf                    54\
+
 /********Constants related to FHR algorithm*************************************/
 #define blockSizeOfFhrPtDf                  516
 #define numTapsOfFhrPtDf                    13
 #define blockSizeOfFhrPtBpf                 516
-#define numTapsOfFhrPtBpf                   21
+#define numTapsOfFhrPtBpf                   51
 #define blockSizeOfMatchFilt                516
 #define numTapsOfMatchFilter                516
 #define blockSizeOfAdaptFiltUS              516
@@ -43,6 +54,9 @@
 #define blockSizeOfMhrPtBpf                 516
 #define numTapsOfBpf1045                    48
 #define blockSizeOfFhr1045                  500
+#define blockSizeOfFhrPtDf                  516
+#define numTapsOfFhrPtDf                    13
+#define numTapsOfFhrConvolution             10
 
 #define NEWQRSRANGE                         39
 #define mhrMinPeakDistance                  250
@@ -71,35 +85,37 @@ extern arm_fir_instance_f32 instanceForUcThkInterp;
 
 /****************************************************************************/
 /**************************** Filter StateArrays ****************************/
-exterm float mhrBpf1045Statearr[blockSizeOfFhr1045 + numTapsOfBpf1045 - 1];
-exterm float fhrBpf1045Statearr[blockSizeOfFhr1045 + numTapsOfBpf1045 - 1];
-exterm float mhrPtBpfStatearr[blockSizeOfMhrPtBpf + numTapsOfMhrPtBpf - 1];
-exterm float mhrPtDfStatearr[blockSizeOfMhrPtDf + numTapsOfMhrPtDf - 1];
-exterm float mhrAdaptFiltDSStatearr[blockSizeOfAdaptFiltDS + numTapsOfAdaptFiltDS - 1];
-exterm float fhrAdaptFiltDSStatearr [blockSizeOfAdaptFiltDS + numTapsOfAdaptFiltDS - 1];
-exterm float mhrAdaptFiltUSStatearr[blockSizeOfAdaptFiltUS + numTapsOfAdaptFiltUS - 1];
-exterm float fhrMatchFiltStatearr[blockSizeOfMatchFilt + numTapsOfMatchFilter - 1];
-exterm float fhrPtBpfStatearr[blockSizeOfFhrPtBpf + numTapsOfFhrPtBpf - 1];
-exterm float fhrPtDfStatearr[blockSizeofFhrPtDf + numTapsOfFhrPtDf - 1];
-exterm float ucLpfStatearr[blockSizeOfUcLpf + numTapsOfUcLpf - 1];
-exterm float UcNotchStatearr[blockSizeOfUcNotch + numTapsOfUcNotch - 1];
-exterm float ucBpfStateArr[blockSizeofUcBpf + numTapsOfUcBpf - 1];
-exterm float ucRmsInterpStatearr[blockSizeOfUcRmsInterp + numTapsOfUcRmsInterp - 1];
-exterm float ucThkInterpStatearr[blockSizeOfUcThkInterp + numTapsOfUcThkInterp - 1];
+extern float mhrBpf1045Statearr[blockSizeOfFhr1045 + numTapsOfBpf1045 - 1];
+extern float fhrBpf1045Statearr[blockSizeOfFhr1045 + numTapsOfBpf1045 - 1];
+extern float mhrPtBpfStatearr[blockSizeOfMhrPtBpf + numTapsOfMhrPtBpf - 1];
+extern float mhrPtDfStatearr[blockSizeOfMhrPtDf + numTapsOfMhrPtDf - 1];
+extern float mhrAdaptFiltDSStatearr[blockSizeOfAdaptFiltDS + numTapsOfAdaptFiltDS - 1];
+extern float fhrAdaptFiltDSStatearr [blockSizeOfAdaptFiltDS + numTapsOfAdaptFiltDS - 1];
+extern float mhrAdaptFiltUSStatearr[blockSizeOfAdaptFiltUS + numTapsOfAdaptFiltUS - 1];
+extern float fhrMatchFiltStatearr[blockSizeOfMatchFilt + numTapsOfMatchFilter - 1];
+extern float fhrPtBpfStatearr[blockSizeOfFhrPtBpf + numTapsOfFhrPtBpf - 1];
+extern float fhrPtDfStatearr[blockSizeOfFhrPtDf + numTapsOfFhrPtDf - 1];
+extern float ucLpfStatearr[blockSizeOfUcLpf + numTapsOfUcLpf - 1];
+extern float UcNotchStatearr[blockSizeOfUcNotch + numTapsOfUcNotch - 1];
+extern float ucBpfStateArr[blockSizeofUcBpf + numTapsOfUcBpf - 1];
+extern float ucRmsInterpStatearr[blockSizeOfUcRmsInterp + numTapsOfUcRmsInterp - 1];
+extern float ucThkInterpStatearr[blockSizeOfUcThkInterp + numTapsOfUcThkInterp - 1];
 
 /****************************************************************************/
 /**************************** Filter coefficients **************************/
-exterm const float CoeffOfFhr1045Bpf[numTapsOfBpf1045] = {-0.00183621,-0.00232659,-0.00281714,-0.00315782,-0.003108,-0.0024614,-0.00122497,0.000229142,0.00112925,0.000449396,-0.00276563,-0.0089707,-0.0177223,-0.0274691,-0.0356554,-0.0391769,-0.0351186,-0.0215993,0.00151149,0.0322347,0.0666269,0.0994459,0.125206,0.139369,0.139369,0.125206,0.0994459,0.0666269,0.0322347,0.00151149,-0.0215993,-0.0351186,-0.0391769,-0.0356554,-0.0274691,-0.0177223,-0.0089707,-0.00276563,0.000449396,0.00112925,0.000229142,-0.00122497,-0.0024614,-0.003108,-0.00315782,-0.00281714,-0.00232659,-0.00183621
-exterm const float CoeffOfMhrPtBpf[numTapsOfMhrPtBpf] = { 0.00410914, 0.00629557,0.0118891, 0.0214315, 0.0347167, 0.0507797, 0.0680232, 0.0844633, 0.0980501, 0.107008, 0.110136, 0.107008, 0.0980501, 0.0844633,0.0680232, 0.0507797,0.0347167, 0.0214315,0.0118891, 0.00629557,0.00410914 };
-exterm const float CoeffOfMhrPtDf[numTapsOfMhrPtDf] = { -72.5,-92.5, -112.5, -110, -70, -30, 10, 50, 90, 122.5, 102.5, 82.5, 62.5 };
-exterm const float coeffOfAdaptFiltUS[numTapsOfAdaptFiltUS];
-exterm const float coeffOfFhrPtBpf[numTapsOfFhrPtBpf];
-exterm const float coeffOfFhrPtDf[numTapsOfFhrPtDf];
-exterm const float coeffOfUcLpf[numTapsOfUcLpf];
-exterm const float coeffOfUcNotch[numTapsOfUcNotch];
-exterm const float coeffOfUcBpf[numTapsOfUcBpf];
-exterm const float coeffOfUcRmsInterp[numTapsOfUcRmsInterp];
-exterm const float coeffOfUcThkInterp[numTapsOfUcThkInterp];
+extern const float CoeffOfFhr1045Bpf[numTapsOfBpf1045];
+extern const float CoeffOfMhrPtBpf[numTapsOfMhrPtBpf];
+extern const float CoeffOfMhrPtDf[numTapsOfMhrPtDf];
+extern const float coeffOfAdaptFiltDS[numTapsOfAdaptFiltDS];
+extern const float coeffOfAdaptFiltUS[numTapsOfAdaptFiltUS];
+extern const float coeffOfFhrPtBpf[numTapsOfFhrPtBpf];
+extern const float coeffOfFhrPtDf[numTapsOfFhrPtDf];
+extern const float coeffOfUcLpf[numTapsOfUcLpf];
+extern const float coeffOfUcNotch[numTapsOfUcNotch];
+extern const float coeffOfUcBpf[numTapsOfUcBpf];
+extern const float coeffOfUcRmsInterp[numTapsOfUcRmsInterp];
+extern const float coeffOfUcThkInterp[numTapsOfUcThkInterp];
+extern const float coeffOfFhrConvolution[numTapsOfFhrConvolution];
 /****************************************************************************/
 
 #endif

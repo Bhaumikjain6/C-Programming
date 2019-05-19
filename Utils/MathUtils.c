@@ -9,6 +9,16 @@ float mean(const float* signal, const size_t size){
   return average/(float)size ;
 }
 
+float meanInt(const int* signal, const size_t size){
+  int average = 0;
+  int i = 0;
+  for(i = 0; i < size; ++i){
+    average += signal[i];
+  }
+  return (float)average/(float)size ;
+}
+
+
 void swapElement(float* input1 , float* input2 ){
   float temp = *input1;
   *input1 = *input2;
@@ -61,7 +71,7 @@ void divideElement(float* signal, size_t size, float value){
     }
 }
 
-void multiplyElement(float* signal, size_t size; float value){
+void multiplyElement(float* signal, size_t size, float value){
   int i;
   for(i = 0; i < size; ++i){
     signal[i] *= value;
@@ -151,7 +161,7 @@ void createArray(float* inputArray, const float value, size_t size){
   }
 }
 
-void meanImputation(float* input1, float* input2, float* mhrLocs, size_t* mhrCount){
+void meanImputation(float* input1, float* input2, int* mhrLocs, size_t* mhrCount){
   int i = 0;
   for(i = 0; i < (*mhrCount); ++i){
     memcpy(input1 + mhrLocs[i] - 19, input2, NEWQRSRANGE * sizeof(float));
@@ -159,7 +169,7 @@ void meanImputation(float* input1, float* input2, float* mhrLocs, size_t* mhrCou
 }
 
 void smoothing(float* inputToSmoothing, float* outputOfSmoothing, size_t size , size_t windowSize){
-    int i = 0;
+    int i = 0, j;
     int midPoint = windowSize / 2 ;
     float sum = 0;
 
@@ -180,16 +190,19 @@ void smoothing(float* inputToSmoothing, float* outputOfSmoothing, size_t size , 
         for(j = i - 2; j < IPSIZE ; ++j){
           sum += inputToSmoothing[j];
         }
-        outputOfSmoothing[i] = sum / (IPSIZE + midPoint - i);
+        outputOfSmoothing[i] = sum / (float)(IPSIZE + midPoint - i);
       }
       sum = 0;
     }
 }
 
 void appendArray(float* input1, float* input2, size_t size){
-    memcpy(input1, input2 , size * sizeOf(float));
+    memcpy(input1, input2 , size * sizeof(float));
 }
 
+void appendArray(int* input1, int* input2, size_t size){
+    memcpy(input1, input2, size * sizeof(int));
+}
 void arraysum(const float* a, const float* b, const size_t n, float* result)
 {
     size_t idx;
@@ -215,6 +228,6 @@ void arraySubtract(float* input1, float* input2, size_t size){
 void findSlopeChange(float* inputToInternalDiff, float* outputOfInternalDiff, size_t size){
   int i = 0;
   for(i = 0; i < size; ++i){
-      if()
+      if(1){}
   }
 }

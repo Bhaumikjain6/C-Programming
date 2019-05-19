@@ -1,39 +1,7 @@
 #include "deviceInit.h"
 
-extern void clockInit(void)
-{
-    /* Configuring pins for peripheral/crystal usage and LED for output */
-    GPIO_setAsPeripheralModuleFunctionOutputPin(
-            GPIO_PORT_PJ,
-            GPIO_PIN3 | GPIO_PIN2,
-            GPIO_PRIMARY_MODULE_FUNCTION);
-
-    /* Just in case the user wants to use the getACLK, getMCLK, etc. functions,
-     * let's set the clock frequency in the code.
-     */
-    CS_setExternalClockSourceFrequency(32000, 48000000);
-
-    /* Starting HFXT in non-bypass mode without a timeout. Before we start
-     * we have to change VCORE to 1 to support the 48MHz frequency */
-    PCM_setCoreVoltageLevel(PCM_VCORE1);
-    FlashCtl_A_setWaitState(FLASH_A_BANK0, 3);
-    FlashCtl_A_setWaitState(FLASH_A_BANK1, 3);
-    CS_startHFXT(false);
-
-    /* Initializing MCLK to HFXT (effectively 48MHz) */
-    CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
-    CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_2);
-}
-
-extern void interrupt_init(void)
-{
-    GPIO_clearInterruptFlag(GPIO_PORT_P2, GPIO_PIN4);
-    GPIO_enableInterrupt(GPIO_PORT_P2, GPIO_PIN4);
-    Interrupt_enableInterrupt(INT_PORT2);
-    GPIO_interruptEdgeSelect(GPIO_PORT_P2, GPIO_PIN4, GPIO_HIGH_TO_LOW_TRANSITION);
-
-    Interrupt_enableMaster();
-}
+// pending LCD,ADC and Flash Init functions.
+// Other functions are without error. The functionality has to be checked.
 
 extern void portInit(void)
 {
@@ -121,6 +89,39 @@ extern void portInit(void)
     GPIO_setOutputHighOnPin(GPIO_PORT_P10, GPIO_PIN0);
 }
 
+extern void clockInit(void)
+{
+    /* Configuring pins for peripheral/crystal usage and LED for output */
+    GPIO_setAsPeripheralModuleFunctionOutputPin(
+            GPIO_PORT_PJ,
+            GPIO_PIN3 | GPIO_PIN2,
+            GPIO_PRIMARY_MODULE_FUNCTION);
+    /* Just in case the user wants to use the getACLK, getMCLK, etc. functions,
+     * let's set the clock frequency in the code.
+     */
+    CS_setExternalClockSourceFrequency(32000, 48000000);
+    /* Starting HFXT in non-bypass mode without a timeout. Before we start
+     * we have to change VCORE to 1 to support the 48MHz frequency */
+    PCM_setCoreVoltageLevel(PCM_VCORE1);
+    FlashCtl_A_setWaitState(FLASH_A_BANK0, 3);
+    FlashCtl_A_setWaitState(FLASH_A_BANK1, 3);
+    CS_startHFXT(false);
+
+    /* Initializing MCLK to HFXT (effectively 48MHz) */
+    CS_initClockSignal(CS_MCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_1);
+    CS_initClockSignal(CS_SMCLK, CS_HFXTCLK_SELECT, CS_CLOCK_DIVIDER_2);
+}
+
+extern void interrupt_init(void)
+{
+    GPIO_clearInterruptFlag(GPIO_PORT_P2, GPIO_PIN4);
+    GPIO_enableInterrupt(GPIO_PORT_P2, GPIO_PIN4);
+    Interrupt_enableInterrupt(INT_PORT2);
+    GPIO_interruptEdgeSelect(GPIO_PORT_P2, GPIO_PIN4, GPIO_HIGH_TO_LOW_TRANSITION);
+
+    Interrupt_enableMaster();
+}
+
 extern void spiInitA1(void){
   // Selecting P1.5 P1.6 and P1.7 in SPI mode
   GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P2,
@@ -172,59 +173,41 @@ extern void uartInitA2(void){
   MAP_UART_enableModule(EUSCI_A2_BASE);
 }
 
+void delay_us(unsigned long timeInMicroSeconds){
+
+  timeInMicroSeconds = (timeInMicroSeconds * 298 * 5 *27) / 1000;
+  while(timeInMicroSeconds)
+    timeInMicroSeconds--;
+}
+
 extern void LCDInit(void){
-    uint8_t txd;
 
     GPIO_setOutputLowOnPin(GPIO_PORT_P9, GPIO_PIN2);
     delay_us(500);
     GPIO_setOutputHighOnPin(GPIO_PORT_P9, GPIO_PIN2);
     delay_us(500);
     GPIO_setOutputLowOnPin(GPIO_PORT_P9, GPIO_PIN4);    //Pulling CS low
-
     delay_us(100);
-    txd = 0x40;            //Display start line 0
-    send_data_SPI_A3(txd);
 
-    txd = 0xA0;            //ADC reverse
-    send_data_SPI_A3(txd);
-
-    txd = 0xC8;            //normal COM0-COM63
-    send_data_SPI_A3(txd);
-
-    txd = 0xA6;            //Display Normal, changing to A7 inverts all the pixels i.e. the entire screen
-    send_data_SPI_A3(txd);
-
-    txd = 0xA2;            //Set bias 1/9 (Duty 1/65)
-    send_data_SPI_A3(txd);
-
-    txd = 0x2F;            //Booster, Regulator and Follower
-    send_data_SPI_A3(txd);
-
-    txd = 0xF8;            //Set internal booster to 4x
-    send_data_SPI_A3(txd);
-    txd = 0x00;
-    send_data_SPI_A3(txd);
-
-    txd = 0x27;            //Contrast set
-    send_data_SPI_A3(txd);
-    txd = 0x81;
-    send_data_SPI_A3(txd);
-    txd = 0x16;
-    send_data_SPI_A3(txd);
-
-    txd = 0xAC;            //No indicator
-    send_data_SPI_A3(txd);
-    txd = 0x00;
-    send_data_SPI_A3(txd);
-
-    txd = 0xAF;            //Display on
-    send_data_SPI_A3(txd);
+    sendDataSpi(EUSCI_A3_BASE,0x40);   //Display start line 0
+    sendDataSpi(EUSCI_A3_BASE,0xA0);   //ADC reverse
+    sendDataSpi(EUSCI_A3_BASE,0xC8);   //normal COM0-COM63
+    sendDataSpi(EUSCI_A3_BASE,0xA6);   //Display Normal, changing to A7 inverts all the pixels i.e. the entire screen
+    sendDataSpi(EUSCI_A3_BASE,0xA2);   //Set bias 1/9 (Duty 1/65)
+    sendDataSpi(EUSCI_A3_BASE,0x2F);   //Booster, Regulator and Follower
+    sendDataSpi(EUSCI_A3_BASE,0xF8);   //Set internal booster to 4x
+    sendDataSpi(EUSCI_A3_BASE,0x00);
+    sendDataSpi(EUSCI_A3_BASE,0x27);   //Contrast set
+    sendDataSpi(EUSCI_A3_BASE,0x81);
+    sendDataSpi(EUSCI_A3_BASE,0x16);
+    sendDataSpi(EUSCI_A3_BASE,0xAC);   //No indicator
+    sendDataSpi(EUSCI_A3_BASE,0x00);
+    sendDataSpi(EUSCI_A3_BASE,0xAF);   //Display on
 
     delay_us(50);
-
     GPIO_setOutputHighOnPin(GPIO_PORT_P9, GPIO_PIN4);
-
     delay_us(50);
+
     clrscr();
 }
 
@@ -259,4 +242,15 @@ void delay_us(unsigned long timeInMicroSeconds){
   timeInMicroSeconds = (timeInMicroSeconds * 298 * 5 *27) / 1000;
   while(i)
     i--;
+}
+
+void allInit(void){
+  portInit();
+  interruptInit();
+  spiInitA3();
+  spiInitA1();
+  spiInitB3();
+  uartInitA2();
+  lcdInit();
+  adcInit();
 }

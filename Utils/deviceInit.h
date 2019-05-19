@@ -70,7 +70,7 @@ extern void uartInitA2(void);
 //! \param None
 //  \return None
 //*****************************************************************************
-extern void LcdInit(void);
+extern void lcdInit(void);
 //*****************************************************************************
 //! Intializes and Enables the ADC module.
 // ! <br> The SPI module for the ADC module is enabled.
@@ -78,12 +78,16 @@ extern void LcdInit(void);
 //! \param None
 //  \return None
 //*****************************************************************************
-extern void AdcInit(void);
+extern void adcInit(void);
 //*****************************************************************************
 //!  A delay function in  Micro seconds
 //! \param unsigned long Giving a delay of timeInMicroSeconds us.
 //  \return None
 //*****************************************************************************
 extern void delay_us(unsigned long timeInMicroSeconds);
+//*****************************************************************************
+extern void allInit(void);
+//****************************************************************************
+
 
 #endif

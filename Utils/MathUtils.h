@@ -1,7 +1,8 @@
 #ifndef MathUtils_H
 #define MathUtils_H
 /* Includes the required files for following functions*/
-#include "includeFiles.h"
+#include "variables.h"
+//#include "includeFiles.h"
 //*****************************************************************************
 //! The function swap Elements by changing the pointers to the respective
 //!     values
@@ -135,6 +136,15 @@ float findMin(const float* sourceArray1, size_t sizeOfArray);
 //*****************************************************************************
 extern float mean(const float* sourceArray1, const size_t sizeOfArray);            //verified
 //*****************************************************************************
+//! The function finds the mean of the following int array.
+//!
+//! \param: Array of which the mean has to be found.
+//! \param: The size of the given float array.
+//
+//  \return The mean of the given array.
+//*****************************************************************************
+extern float meanInt(const int* sourceArray1, const size_t sizeOfArray);            //verified
+//*****************************************************************************
 //! The function upsamples the source Array by appending zeroes.
 //!
 //! \param: The source Array.
@@ -209,7 +219,7 @@ extern void createArray(float* sourceArray, const float initialValue, size_t siz
 //  \return None
 //*****************************************************************************
 extern void meanImputation(float* destionationArray, float* ValuesToBeSubstitued
-                ,float* IntialIndex, size_t* noOfSubstituition);
+                ,int* IntialIndex, size_t* noOfSubstituition);
 //*****************************************************************************
 //! The function is a moving average function of window size.
 
@@ -260,6 +270,6 @@ extern void timeCheck(int*, size_t , size_t);
 //!       doesn't satisfy, the respective indexes are replaced by 0.
 //  \return None
 //*****************************************************************************
-void amplitudeCheck(float* , float* , int* ,);
+void amplitudeCheck(float* , float* , int* );
 
 #endif
